@@ -66,7 +66,7 @@
                 <button @click ="removeTodo(i)" type="button" name="button">Remover</button>
             </ul>
         </div> 
-    <div>{{ valor.sort( compare )}}</div>
+    
     <div v-for= " i in ordem" >
             <span :class="{done: i.done}">Dia: {{i.dia}}</span>
             <div v-for= " j in i.items" >
