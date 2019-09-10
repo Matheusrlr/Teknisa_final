@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>To do</title>
+    <link rel="stylesheet" href="https://ez-css.now.sh">
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+
+        .content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .descricao{
+            color: #707070;
+        }
+
+        .center{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <main id="app">
+
+        <h3>{{title}}</h3>
+
+        <form @submit.prevent ="addTodo">
+            <label for="newTodo">Nome</label>
+            <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+            <label for="desc">Descrição</label>
+            <input v-model="desc" type="text" name="desc" id="desc" value="">
+            <label for="number">Valor da tarefa (1-13):</label>
+            <input v-model.number="number" type="number" name="valor" id="number" min="1" max="13">
+            <button type="submit" name="button">Adicionar</button>
+        </form>
+        <button @click="allDone" type="button" name="button">Marcar todas como finalizadas</button>
+      <div> 
+            <ul>
+                <li v-for= "i in todos">
+                    <div class="content">
+                        <div>
+                            <div class="titulo" >
+                                <span :class="{done: i.done}">{{i.title}}</span>
+                            </div>
+                            <div class="descricao">
+                                <span :class="{done: i.done}">{{i.desc}}</span>
+                            </div> 
+                        </div>
+                        <div class="center">
+                            <span :class="{done: i.done}">{{i.val}}</span>
+                            <input type="checkbox"  v-model="i.done">
+                        </div>
+                    </div>
+                    
+                </li>
+                <button @click ="removeTodo(i)" type="button" name="button">Remover</button>
+            </ul>
+        </div> 
+    <div>{{ valor.sort( compare )}}</div>
+    <div v-for= " i in ordem" >
+            <span :class="{done: i.done}">Dia: {{i.dia}}</span>
+            <div v-for= " j in i.items" >
+                    Item: <span style="color:#707070" :class="{done: j.done}">{{j.desc}}</span>
+                    Peso: <span style="color:#707070" :class="{done: j.done}">{{j.peso}}</span>
+            </div>
+        </div>
+    
+
+   
+    </main>
+
+    <script src="app.js" charset="utf-8"></script>
+</body>
+</html>
